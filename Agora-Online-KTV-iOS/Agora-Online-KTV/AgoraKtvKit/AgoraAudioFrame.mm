@@ -10,8 +10,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <queue>
-#include <AgoraRtcEngineKit/IAgoraRtcEngine.h>
-#include <AgoraRtcEngineKit/IAgoraMediaEngine.h>
+#include <AgoraRtcKit/IAgoraRtcEngine.h>
+#include <AgoraRtcKit/IAgoraMediaEngine.h>
 
 #import <mach/mach_time.h>
 #import "AudioCircularBuffer.h"

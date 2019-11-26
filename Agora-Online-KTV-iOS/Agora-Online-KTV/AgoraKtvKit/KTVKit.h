@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
+#import <AgoraRtcKit/AgoraRtcEngineKit.h>
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, KTVStatusType)
 {

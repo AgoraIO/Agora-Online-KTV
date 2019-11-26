@@ -52,7 +52,8 @@
     [_rtcEngine enableInEarMonitoring:true];
     
     //开启说话人检测功能
-    [_rtcEngine enableAudioVolumeIndication:200 smooth:3];
+    [_rtcEngine enableAudioVolumeIndication:200 smooth:3 report_vad:NO];
+   
     //加入房间
     [_rtcEngine setExternalVideoSource:true useTexture:false pushMode:true];
     [_rtcEngine setVideoEncoderConfiguration:
