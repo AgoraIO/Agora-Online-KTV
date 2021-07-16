@@ -20,10 +20,8 @@ import java.util.Map;
 
 import io.agora.ktv.bean.MemberMusicModel;
 import io.agora.lrcview.LrcView;
-import io.agora.mediaplayer.AudioFrameObserver;
 import io.agora.mediaplayer.IMediaPlayer;
 import io.agora.mediaplayer.IMediaPlayerObserver;
-import io.agora.mediaplayer.data.AudioFrame;
 import io.agora.mediaplayer.data.MediaStreamInfo;
 import io.agora.rtc2.ChannelMediaOptions;
 import io.agora.rtc2.Constants;
@@ -141,32 +139,6 @@ public class MusicPlayer extends IRtcEngineEventHandler implements IMediaPlayerO
         }
     };
 
-    private final AudioFrameObserver mAudioFrameObserver = new AudioFrameObserver() {
-        @Override
-        public AudioFrame onFrame(AudioFrame audioFrame) {
-            if (mMusicModel == null) {
-                return audioFrame;
-            }
-
-            int channelNums = audioFrame.channelNums;
-            mAudioTracksCount = channelNums;
-
-            if (mAudioTrackIndex == 0 && channelNums == 2) {
-                int bytesPerSample = audioFrame.bytesPerSample;
-                int samplesPerChannel = audioFrame.samplesPerChannel;
-
-                byte[] tempBuf = new byte[audioFrame.bytes.length];
-                int cpBytes = bytesPerSample;
-                for (int i = 0; i < samplesPerChannel; i++) {
-                    System.arraycopy(audioFrame.bytes, i * 2 * bytesPerSample, tempBuf, 0, cpBytes);
-                    System.arraycopy(audioFrame.bytes, i * 2 * bytesPerSample + cpBytes, audioFrame.bytes, i * 2 * bytesPerSample + cpBytes, cpBytes);
-                    System.arraycopy(tempBuf, 0, audioFrame.bytes, i * 2 * bytesPerSample + cpBytes, cpBytes);
-                }
-            }
-            return audioFrame;
-        }
-    };
-
     public MusicPlayer(Context mContext, RtcEngine mRtcEngine, LrcView lrcView) {
         this.mContext = mContext;
         this.mRtcEngine = mRtcEngine;
@@ -177,7 +149,6 @@ public class MusicPlayer extends IRtcEngineEventHandler implements IMediaPlayerO
         // init mpk
         mPlayer = mRtcEngine.createMediaPlayer();
         mPlayer.registerPlayerObserver(this);
-        mPlayer.registerAudioFrameObserver(mAudioFrameObserver, Constants.RAW_AUDIO_FRAME_OP_MODE_READ_WRITE);
 
         mRtcEngine.addHandler(this);
     }
@@ -343,18 +314,32 @@ public class MusicPlayer extends IRtcEngineEventHandler implements IMediaPlayerO
     private int mAudioTrackIndex = 1;
 
     public void selectAudioTrack(int i) {
-        if (i < 0 || mAudioTracksCount == 0 || i >= mAudioTracksCount)
-            return;
+        //        if (i < 0 || mAudioTracksCount == 0 || i >= mAudioTracksCount)
+//            return;
+//
+//        mAudioTrackIndex = i;
+//
+//        if (mMusicModel.getType() == MemberMusicModel.Type.Default) {
+//            mPlayer.selectAudioTrack(mAudioTrackIndices[i]);
+//        } else {
+//            mPlayer.setAudioDualMonoMode(mAudioTracksCount);
+//        }
 
+        //因为咪咕音乐没有音轨，只有左右声道，所以暂定如此
         mAudioTrackIndex = i;
 
-        if (mMusicModel.getType() == MemberMusicModel.Type.Default) {
-            mPlayer.selectAudioTrack(mAudioTrackIndices[i]);
+        if (mAudioTrackIndex == 0) {
+            mPlayer.setAudioDualMonoMode(1);
+        } else {
+            mPlayer.setAudioDualMonoMode(2);
         }
     }
 
     public boolean hasAccompaniment() {
-        return mAudioTracksCount >= 2;
+//        return mAudioTracksCount >= 2;
+
+        //因为咪咕音乐没有音轨，只有左右声道，所以暂定如此
+        return true;
     }
 
     public void toggleOrigle() {
@@ -442,8 +427,8 @@ public class MusicPlayer extends IRtcEngineEventHandler implements IMediaPlayerO
             public void run() {
                 mLogger.i("startSyncLrc: " + lrcId);
                 DataStreamConfig cfg = new DataStreamConfig();
-                cfg.syncWithAudio = false;
-                cfg.ordered = false;
+                cfg.syncWithAudio = true;
+                cfg.ordered = true;
                 mStreamId = mRtcEngine.createDataStream(cfg);
 
                 mStopSyncLrc = false;
@@ -722,7 +707,6 @@ public class MusicPlayer extends IRtcEngineEventHandler implements IMediaPlayerO
         mRtcEngine.removeHandler(this);
         mCallback = null;
 
-        mPlayer.registerAudioFrameObserver(null, Constants.RAW_AUDIO_FRAME_OP_MODE_READ_WRITE);
         mPlayer.destroy();
         mPlayer = null;
     }
