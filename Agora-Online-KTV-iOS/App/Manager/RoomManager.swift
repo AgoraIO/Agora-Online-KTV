@@ -78,6 +78,7 @@ extension RoomManager: IRoomManager {
                 .map { result in
                     if result.success {
                         room.id = result.data!
+                        room.createdAt = Date()
                         return Result(success: true, data: room)
                     } else {
                         return Result(success: false, message: result.message)
@@ -187,7 +188,7 @@ extension RoomManager: IRoomManager {
         guard let room = room else {
             return Observable.just(Result(success: false, message: "room is nil!"))
         }
-        return room.subscribe()
+        return Observable.merge([room.subscribe(), room.timeUp()])
     }
 
     func subscribeMembers() -> Observable<Result<[LiveKtvMember]>> {
@@ -259,6 +260,12 @@ extension RoomManager: IRoomManager {
             return rtcServer.play(music: music)
         } else {
             return Observable.just(Result(success: true))
+        }
+    }
+
+    func seekMusic(position: TimeInterval) {
+        if rtcServer.isJoinChannel {
+            rtcServer.seekMusic(position: position)
         }
     }
 

@@ -54,7 +54,7 @@ public protocol IUserManager {
     func create(user: User) -> Observable<Result<String>>
     func getUser(by objectId: String) -> Observable<Result<User>>
     func update(user: User, name: String) -> Observable<Result<Void>>
-    func getMusicList() -> Observable<Result<[LrcMusic]>>
+    func getMusicList(key: String?) -> Observable<Result<[LrcMusic]>>
     func getMusic(id: String) -> Observable<Result<LrcMusic>>
 }
 
@@ -79,8 +79,8 @@ public extension User {
         return User.manager.update(user: self, name: name)
     }
 
-    func getMusicList() -> Observable<Result<[LrcMusic]>> {
-        return User.manager.getMusicList()
+    func getMusicList(key: String? = nil) -> Observable<Result<[LrcMusic]>> {
+        return User.manager.getMusicList(key: key)
     }
 
     func getMusic(id: String) -> Observable<Result<LrcMusic>> {

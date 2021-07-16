@@ -21,7 +21,6 @@
 		574C9CBC266A0B7E00822A95 /* app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574C9CB0266A0B4200822A95 /* app.framework */; };
 		574C9CBD266A0B7E00822A95 /* app.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 574C9CB0266A0B4200822A95 /* app.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		574C9CC0266A0BDB00822A95 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5757D048262D834700B4A785 /* Core.framework */; };
-		574C9CC1266A0BDB00822A95 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5757D048262D834700B4A785 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		574C9CCA266A0C4300822A95 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574C9CC9266A0C4300822A95 /* Model.swift */; };
 		574C9CCC266A1E7E00822A95 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 574C9CCB266A1E7E00822A95 /* Media.xcassets */; };
 		574C9CCE266A24C600822A95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 574C9CCD266A24C600822A95 /* Main.storyboard */; };
@@ -76,14 +75,16 @@
 		5764BBC22671F79500293B73 /* PlayerSettingDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764BBC12671F79500293B73 /* PlayerSettingDialog.swift */; };
 		5764BBC42672034900293B73 /* SelectMVDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764BBC32672034900293B73 /* SelectMVDialog.swift */; };
 		5764BBC626723F1200293B73 /* LiveKtvMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764BBC526723F1200293B73 /* LiveKtvMusic.swift */; };
-		5764BBDB2673505100293B73 /* send_it_cn.lrc in Resources */ = {isa = PBXBuildFile; fileRef = 5764BBD62673505100293B73 /* send_it_cn.lrc */; };
-		5764BBDC2673505100293B73 /* qinghuaci.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5764BBD72673505100293B73 /* qinghuaci.m4a */; };
-		5764BBDD2673505100293B73 /* send_it_en.lrc in Resources */ = {isa = PBXBuildFile; fileRef = 5764BBD82673505100293B73 /* send_it_en.lrc */; };
-		5764BBDE2673505100293B73 /* qinghuaci.lrc in Resources */ = {isa = PBXBuildFile; fileRef = 5764BBD92673505100293B73 /* qinghuaci.lrc */; };
-		5764BBDF2673505100293B73 /* send_it.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5764BBDA2673505100293B73 /* send_it.m4a */; };
 		5764BBE12673512F00293B73 /* LocalMusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764BBE02673512F00293B73 /* LocalMusicManager.swift */; };
 		5764BBE426735D9900293B73 /* Lyric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764BBE326735D9900293B73 /* Lyric.swift */; };
 		5764BBE62673AE1F00293B73 /* MusicLyricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5764BBE52673AE1F00293B73 /* MusicLyricView.swift */; };
+		5782AC8A2695597500B4162A /* MiguLyric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782AC892695597500B4162A /* MiguLyric.swift */; };
+		5782AC8C26958EED00B4162A /* 004.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5782AC8B26958EED00B4162A /* 004.xml */; };
+		5782AC8D2695A76300B4162A /* 004.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5782AC8B26958EED00B4162A /* 004.xml */; };
+		5782AC8F2695CA7D00B4162A /* LrcSentence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782AC8E2695CA7D00B4162A /* LrcSentence.swift */; };
+		5782AC91269C144200B4162A /* 005.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5782AC90269C144200B4162A /* 005.xml */; };
+		5782AC93269C145100B4162A /* 001.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5782AC92269C145100B4162A /* 001.xml */; };
+		5782AC95269C4B0200B4162A /* 003.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5782AC94269C4B0200B4162A /* 003.xml */; };
 		5783FE942664B571000B39F3 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5783FE932664B571000B39F3 /* SyncManager.swift */; };
 		5783FEA62666250B000B39F3 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5783FEA52666250B000B39F3 /* SyncManager.swift */; };
 		5783FEA926662555000B39F3 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5783FEA72666253D000B39F3 /* SyncManager.swift */; };
@@ -108,6 +109,8 @@
 		57F6396D263000C300B45C0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57F6396F263000C300B45C0B /* Localizable.strings */; };
 		57F639732630015200B45C0B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57F639722630015200B45C0B /* Media.xcassets */; };
 		57F639D926304ACE00B45C0B /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F639D826304ACE00B45C0B /* RoundButton.swift */; };
+		57FFD42426A02A0200668BE0 /* ColorThief.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFD42326A02A0200668BE0 /* ColorThief.swift */; };
+		57FFD42626A02DEA00668BE0 /* MMCQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FFD42526A02DEA00668BE0 /* MMCQ.swift */; };
 		6B7246CCC6D98958270A218F /* Pods_OnlineKTV_LeanCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CA5154BEFE30CEC188B4E6 /* Pods_OnlineKTV_LeanCloud.framework */; };
 		761402B6C292295B451C235C /* Pods_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D7AE253FD40BFF3FC44E37 /* Pods_Core.framework */; };
 		8DBFDF9E1F5B67064C73BC9C /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C940726440F80BCBE3DFF6 /* Pods_app.framework */; };
@@ -158,7 +161,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				574C9CC1266A0BDB00822A95 /* Core.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,14 +274,15 @@
 		5764BBC12671F79500293B73 /* PlayerSettingDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSettingDialog.swift; sourceTree = "<group>"; };
 		5764BBC32672034900293B73 /* SelectMVDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMVDialog.swift; sourceTree = "<group>"; };
 		5764BBC526723F1200293B73 /* LiveKtvMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveKtvMusic.swift; sourceTree = "<group>"; };
-		5764BBD62673505100293B73 /* send_it_cn.lrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = send_it_cn.lrc; sourceTree = "<group>"; };
-		5764BBD72673505100293B73 /* qinghuaci.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = qinghuaci.m4a; sourceTree = "<group>"; };
-		5764BBD82673505100293B73 /* send_it_en.lrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = send_it_en.lrc; sourceTree = "<group>"; };
-		5764BBD92673505100293B73 /* qinghuaci.lrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = qinghuaci.lrc; sourceTree = "<group>"; };
-		5764BBDA2673505100293B73 /* send_it.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = send_it.m4a; sourceTree = "<group>"; };
 		5764BBE02673512F00293B73 /* LocalMusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMusicManager.swift; sourceTree = "<group>"; };
 		5764BBE326735D9900293B73 /* Lyric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lyric.swift; sourceTree = "<group>"; };
 		5764BBE52673AE1F00293B73 /* MusicLyricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicLyricView.swift; sourceTree = "<group>"; };
+		5782AC892695597500B4162A /* MiguLyric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiguLyric.swift; sourceTree = "<group>"; };
+		5782AC8B26958EED00B4162A /* 004.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 004.xml; sourceTree = "<group>"; };
+		5782AC8E2695CA7D00B4162A /* LrcSentence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LrcSentence.swift; sourceTree = "<group>"; };
+		5782AC90269C144200B4162A /* 005.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 005.xml; sourceTree = "<group>"; };
+		5782AC92269C145100B4162A /* 001.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 001.xml; sourceTree = "<group>"; };
+		5782AC94269C4B0200B4162A /* 003.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 003.xml; sourceTree = "<group>"; };
 		5783FE932664B571000B39F3 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		5783FEA52666250B000B39F3 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		5783FEA72666253D000B39F3 /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 		57F639722630015200B45C0B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		57F639D3263031C100B45C0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		57F639D826304ACE00B45C0B /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		57FFD42326A02A0200668BE0 /* ColorThief.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThief.swift; sourceTree = "<group>"; };
+		57FFD42526A02DEA00668BE0 /* MMCQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMCQ.swift; sourceTree = "<group>"; };
 		5E10D1E8C56ADBA341AB43AE /* Pods-Core_LeanCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Core_LeanCloud.debug.xcconfig"; path = "Target Support Files/Pods-Core_LeanCloud/Pods-Core_LeanCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		5F8E2FB0C8FCBF6C320DEE8A /* Pods-OnlineKTV_LeanCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnlineKTV_LeanCloud.debug.xcconfig"; path = "Target Support Files/Pods-OnlineKTV_LeanCloud/Pods-OnlineKTV_LeanCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		62FCFC75A3DE87EC24840504 /* Pods-OnlineKTV_Firebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnlineKTV_Firebase.release.xcconfig"; path = "Target Support Files/Pods-OnlineKTV_Firebase/Pods-OnlineKTV_Firebase.release.xcconfig"; sourceTree = "<group>"; };
@@ -436,6 +441,8 @@
 				5757D062262D84E400B4A785 /* Colors.swift */,
 				5757D071262D8E5600B4A785 /* Logger.swift */,
 				5757D075262D8EBE00B4A785 /* Utils.swift */,
+				57FFD42326A02A0200668BE0 /* ColorThief.swift */,
+				57FFD42526A02DEA00668BE0 /* MMCQ.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -622,11 +629,10 @@
 		5764BBD52673505100293B73 /* Res */ = {
 			isa = PBXGroup;
 			children = (
-				5764BBD62673505100293B73 /* send_it_cn.lrc */,
-				5764BBD72673505100293B73 /* qinghuaci.m4a */,
-				5764BBD82673505100293B73 /* send_it_en.lrc */,
-				5764BBD92673505100293B73 /* qinghuaci.lrc */,
-				5764BBDA2673505100293B73 /* send_it.m4a */,
+				5782AC92269C145100B4162A /* 001.xml */,
+				5782AC90269C144200B4162A /* 005.xml */,
+				5782AC8B26958EED00B4162A /* 004.xml */,
+				5782AC94269C4B0200B4162A /* 003.xml */,
 			);
 			path = Res;
 			sourceTree = SOURCE_ROOT;
@@ -636,6 +642,8 @@
 			children = (
 				5764BBE02673512F00293B73 /* LocalMusicManager.swift */,
 				5764BBE326735D9900293B73 /* Lyric.swift */,
+				5782AC892695597500B4162A /* MiguLyric.swift */,
+				5782AC8E2695CA7D00B4162A /* LrcSentence.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -886,15 +894,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5782AC8D2695A76300B4162A /* 004.xml in Resources */,
+				5782AC95269C4B0200B4162A /* 003.xml in Resources */,
 				57E8D62A264A7306007001BC /* Localizable.strings in Resources */,
-				5764BBDD2673505100293B73 /* send_it_en.lrc in Resources */,
+				5782AC93269C145100B4162A /* 001.xml in Resources */,
 				571AA47D2629862800B82B35 /* LaunchScreen.storyboard in Resources */,
 				571AA47A2629862800B82B35 /* Assets.xcassets in Resources */,
-				5764BBDB2673505100293B73 /* send_it_cn.lrc in Resources */,
-				5764BBDF2673505100293B73 /* send_it.m4a in Resources */,
+				5782AC91269C144200B4162A /* 005.xml in Resources */,
 				5791A95E267AF2FB00A02B30 /* Main.storyboard in Resources */,
-				5764BBDE2673505100293B73 /* qinghuaci.lrc in Resources */,
-				5764BBDC2673505100293B73 /* qinghuaci.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +911,7 @@
 			files = (
 				574C9CCC266A1E7E00822A95 /* Media.xcassets in Resources */,
 				574C9CD9266A2B1900822A95 /* Localizable.strings in Resources */,
+				5782AC8C26958EED00B4162A /* 004.xml in Resources */,
 				574C9CCE266A24C600822A95 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1133,6 +1141,8 @@
 				574C9CD4266A26BE00822A95 /* Colors.swift in Sources */,
 				5764BBE426735D9900293B73 /* Lyric.swift in Sources */,
 				574C9CCA266A0C4300822A95 /* Model.swift in Sources */,
+				5782AC8F2695CA7D00B4162A /* LrcSentence.swift in Sources */,
+				5782AC8A2695597500B4162A /* MiguLyric.swift in Sources */,
 				5764BBA6266E53D800293B73 /* MVPlayer.swift in Sources */,
 				574C9CDD266A41AE00822A95 /* HomeViewModel.swift in Sources */,
 				5764BBC626723F1200293B73 /* LiveKtvMusic.swift in Sources */,
@@ -1158,7 +1168,9 @@
 				570997CB265756EC00B87998 /* AppDataManager.swift in Sources */,
 				5757D063262D84E400B4A785 /* Colors.swift in Sources */,
 				5757D0A1262DAC1500B4A785 /* Dialog.swift in Sources */,
+				57FFD42626A02DEA00668BE0 /* MMCQ.swift in Sources */,
 				5757D0E2262DAFDA00B4A785 /* Config.swift in Sources */,
+				57FFD42426A02A0200668BE0 /* ColorThief.swift in Sources */,
 				5783FEAB26662859000B39F3 /* UserManager.swift in Sources */,
 				5757D05A262D841400B4A785 /* Extension.swift in Sources */,
 				5757D165262DB9DB00B4A785 /* Model.xcdatamodeld in Sources */,
@@ -1383,6 +1395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0703;
 				DEVELOPMENT_TEAM = Y695MMFA83;
 				INFOPLIST_FILE = "$(SRCROOT)/OnlineKTV/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1390,6 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.4.200;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLEANCLOUD";
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.OnlineKTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1415,6 +1429,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.4.200;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLEANCLOUD";
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.OnlineKTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";

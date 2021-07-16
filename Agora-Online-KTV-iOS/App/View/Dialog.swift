@@ -158,7 +158,7 @@ extension BaseViewContoller {
                     // view.center = backgroundView.center
 
                     backgroundView.addSubview(view)
-                    view.centerY(anchor: backgroundView.centerYAnchor, constant: 0)
+                    view.centerY(anchor: backgroundView.centerYAnchor, constant: -80)
                         .centerX(anchor: backgroundView.centerXAnchor)
                         .active()
                     backgroundView.alpha = 0

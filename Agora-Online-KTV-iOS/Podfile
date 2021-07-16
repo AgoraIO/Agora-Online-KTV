@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '13.0'
+source 'https://github.com/CocoaPods/Specs.git'
 
 def commonPods
   use_frameworks!
@@ -20,6 +21,7 @@ target 'app' do
   use_frameworks!
   pod 'AgoraSdk', :path => './AgoraSdk'
   #pod 'YYCache'
+  pod 'Zip', '~> 2.1'
 end
 
 # target with leancloud sdk

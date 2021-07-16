@@ -17,12 +17,12 @@ public class DownloadManager {
 
     private init() {}
 
-    public func getFile(url: String, completion: @escaping (DownloadResult) -> Void) {
+    public func getFile(url: String, completion: @escaping (DownloadResult) -> Void) -> URLSessionTask? {
         Logger.log(self, message: "getFile: \(url)", level: .info)
         let _url = URL(string: url)
         if let _url = _url {
             do {
-                let documentsURL = try FileManager.default.url(for: .documentDirectory,
+                let documentsURL = try FileManager.default.url(for: .cachesDirectory,
                                                                in: .userDomainMask,
                                                                appropriateFor: nil,
                                                                create: false)
@@ -46,6 +46,7 @@ public class DownloadManager {
                         }
                     }
                     downloadTask.resume()
+                    return downloadTask
                 }
             } catch {
                 completion(DownloadResult.failed(error: error.localizedDescription))
@@ -53,5 +54,6 @@ public class DownloadManager {
         } else {
             completion(DownloadResult.failed(error: "url is Empty!"))
         }
+        return nil
     }
 }

@@ -292,13 +292,17 @@ private class SearchView: UIView, UITextFieldDelegate {
     private var editor: UITextField = {
         let view = UITextField()
         view.borderStyle = .none
-        view.attributedPlaceholder = NSAttributedString(string: "搜索歌曲或歌手", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "#7e7e7e")])
+        view.attributedPlaceholder = NSAttributedString(string: "搜索歌曲", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "#7e7e7e")])
         view.font = UIFont.systemFont(ofSize: 14)
         view.textColor = UIColor(hex: "#ccffffff")
         view.clearButtonMode = .whileEditing
         view.returnKeyType = .search
         return view
     }()
+
+    var text: String {
+        return editor.text ?? ""
+    }
 
     init() {
         super.init(frame: .zero)
@@ -630,7 +634,7 @@ class MusicListDialog: Dialog, UIScrollViewDelegate, HeaderViewDelegate, SearchV
         onSelect(index: 0)
         reload()
         show(controller: delegate)
-        onSearch(text: "")
+        onSearch(text: searchView.text)
     }
 
     func reload() {

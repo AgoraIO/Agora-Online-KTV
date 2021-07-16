@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
 #  s.static_framework = true
   s.libraries   = 'z', 'resolv.9', 'c++'
   s.frameworks = 'UIKit','SystemConfiguration','CoreLocation','Foundation','CoreML','VideoToolbox','CoreMedia','CoreAudio','Accelerate','CoreTelephony'
-  s.vendored_frameworks ='AgoraSdk/Libs/*.framework','AgoraSdk/RtmKit/*.framework'
-  s.vendored_libraries = 'AgoraSdk/Libs/*.a'
+  s.vendored_frameworks ='3.4.200/Libs/*.framework','3.4.200/RtmKit/*.framework'
+  s.vendored_libraries = '3.4.200/Libs/*.a'
     
 end

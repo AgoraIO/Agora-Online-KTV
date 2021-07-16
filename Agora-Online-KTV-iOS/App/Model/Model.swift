@@ -67,6 +67,7 @@ enum AgoraSyncEvent {
     case create(object: IAgoraObject)
     case update(object: IAgoraObject)
     case delete(id: String)
+    case subscribed
 }
 
 class AgoraSyncManagerEventDelegate: ISyncManagerEventDelegate {
@@ -88,6 +89,10 @@ class AgoraSyncManagerEventDelegate: ISyncManagerEventDelegate {
 
     func onDeleted(objectId: String) {
         onEvent(.delete(id: objectId))
+    }
+
+    func onSubscribed() {
+        onEvent(.subscribed)
     }
 
     func onError(code: Int, msg: String) {

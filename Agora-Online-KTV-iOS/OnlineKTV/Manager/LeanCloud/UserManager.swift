@@ -63,12 +63,24 @@
             }
         }
 
-        func getMusicList() -> Observable<Result<[LrcMusic]>> {
-            return Database.query(className: "MUSIC_REPOSITORY", queryWhere: nil) { (list: [LCObject]) in
-                list.map { data in
-                    let id = data.get("musicId")!.stringValue!
-                    let name = data.get("name")!.stringValue!
-                    return LrcMusic(id: id, name: name, song: "", lrc: "")
+        func getMusicList(key: String?) -> Observable<Result<[LrcMusic]>> {
+            if let key = key {
+                return Database.query(className: "MUSIC_REPOSITORY", queryWhere: { query in
+                    try query.where("name", .matchedSubstring(key))
+                }) { (list: [LCObject]) in
+                    list.map { data in
+                        let id = data.get("musicId")!.stringValue!
+                        let name = data.get("name")!.stringValue!
+                        return LrcMusic(id: id, name: name, song: "", lrc: "")
+                    }
+                }
+            } else {
+                return Database.query(className: "MUSIC_REPOSITORY", queryWhere: nil) { (list: [LCObject]) in
+                    list.map { data in
+                        let id = data.get("musicId")!.stringValue!
+                        let name = data.get("name")!.stringValue!
+                        return LrcMusic(id: id, name: name, song: "", lrc: "")
+                    }
                 }
             }
         }

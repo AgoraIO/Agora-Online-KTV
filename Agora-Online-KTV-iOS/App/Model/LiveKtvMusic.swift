@@ -10,12 +10,15 @@ import Foundation
 import RxSwift
 
 class LiveKtvMusic: Codable, IAgoraModel {
+    public static let NORMAL = 0
+    public static let CHORUS = 1
+
     public var id: String
     public var roomId: String
     public var name: String
     public var musicId: String
 
-    public var type: Int = 0
+    public var type: Int
 
     public var userId: String
     public var userStatus: Int?
@@ -25,12 +28,13 @@ class LiveKtvMusic: Codable, IAgoraModel {
 
     public var applyUser1Id: String?
 
-    init(id: String, userId: String, roomId: String, name: String, musicId: String) {
+    init(id: String, userId: String, roomId: String, name: String, musicId: String, type: Int = LiveKtvMusic.NORMAL) {
         self.id = id
         self.userId = userId
         self.roomId = roomId
         self.name = name
         self.musicId = musicId
+        self.type = type
     }
 
     func isOrderBy(member: LiveKtvMember) -> Bool {

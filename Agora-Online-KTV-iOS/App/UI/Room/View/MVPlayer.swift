@@ -9,7 +9,7 @@ import Core
 import Foundation
 import UIKit
 
-class MVPlayer {
+class MVPlayer: NSObject {
     enum Status {
         case stop
         case play
@@ -55,9 +55,9 @@ class MVPlayer {
         }
     }
 
-    var hookSwitchView = UIView()
+    private lazy var hookSwitchView = UIView()
 
-    var stopView: UIView = {
+    private lazy var stopView: UIView = {
         let view = UIView()
         let icon = UIImageView()
         icon.image = UIImage(named: "empty1", in: Utils.bundle, with: nil)
@@ -98,39 +98,12 @@ class MVPlayer {
     var music: LiveKtvMusic? {
         didSet {
             if music?.id == oldValue?.id {
+                if music?.type == 1 {
+                    onChorusStateChange(old: oldValue)
+                }
                 return
             }
-            if let music = music {
-                originSettingView.setOn(true, animated: true)
-                status = .play
-                updateMusicLyricViewLayout()
-                delegate.viewModel.fetchMusicLrc(music: music) { [weak self] waiting in
-                    // delegate.show(processing: waiting)
-                    if waiting {
-                        self?.musicLyricView.lyrics = nil
-                    }
-                } onSuccess: { [weak self] localMusic in
-                    self?.musicLyricView.lyrics = LocalMusicManager.parseLyric(music: localMusic)
-                } onError: { [weak self] message in
-                    self?.delegate.show(message: message, type: .error)
-                }
-//                if let localMusic = delegate.viewModel.getLocalMusic(music: music) {
-//                    musicLyricView.lyrics = LocalMusicManager.parseLyric(music: localMusic)
-//                } else {
-//                    musicLyricView.lyrics = nil
-//                }
-            } else {
-                status = .none
-            }
-
-            if let musicName = music?.name {
-                name.text = musicName
-                icon.isHidden = false
-                name.isHidden = false
-            } else {
-                icon.isHidden = true
-                name.isHidden = true
-            }
+            onPlayMusicChange()
         }
     }
 
@@ -183,11 +156,44 @@ class MVPlayer {
         }
     }
 
+    private func onPlayMusicChange() {
+        if let music = music {
+            originSettingView.setOn(true, animated: true)
+            status = .play
+            updateMusicLyricViewLayout()
+            delegate.viewModel.fetchMusicLrc(music: music) { [weak self] waiting in
+                if waiting {
+                    self?.musicLyricView.lyrics = nil
+                }
+            } onSuccess: { [weak self] localMusic in
+                if localMusic.id == self?.music?.musicId {
+                    self?.musicLyricView.lyrics = LocalMusicManager.parseLyric(music: localMusic)
+                }
+            } onError: { [weak self] message in
+                self?.delegate.show(message: message, type: .error)
+            }
+        } else {
+            status = .none
+        }
+
+        if let musicName = music?.name {
+            name.text = musicName
+            icon.isHidden = false
+            name.isHidden = false
+        } else {
+            icon.isHidden = true
+            name.isHidden = true
+        }
+    }
+
+    private func onChorusStateChange(old _: LiveKtvMusic?) {}
+
     func subcribeUIEvent() {
         settingsView.addTarget(self, action: #selector(onTapSettingsView), for: .touchUpInside)
         playerControlView.addTarget(self, action: #selector(onTapPlayerControlView), for: .touchUpInside)
         switchMusicView.addTarget(self, action: #selector(onSwitchMusic), for: .touchUpInside)
         hookSwitchView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onSwitchOrigin)))
+        musicLyricView.delegate = self
     }
 
     func onMusic(state: RtcMusicState) {
@@ -275,5 +281,12 @@ class MVPlayer {
 
     deinit {
         Logger.log(self, message: "deinit", level: .info)
+    }
+}
+
+extension MVPlayer: MusicLyricViewDelegate {
+    func userEndSeeking(time: TimeInterval) {
+        Logger.log(self, message: "userEndSeeking \(time)", level: .info)
+        delegate.viewModel.seekMusic(position: time)
     }
 }

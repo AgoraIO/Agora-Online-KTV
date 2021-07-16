@@ -8,11 +8,18 @@
 import Core
 import Foundation
 
-struct LyricModel {
+class LyricModel {
     let msTime: TimeInterval
     let secTime: TimeInterval
     let timeString: String
     let content: String
+
+    init(msTime: TimeInterval, secTime: TimeInterval, timeString: String, content: String) {
+        self.msTime = msTime
+        self.secTime = secTime
+        self.timeString = timeString
+        self.content = content
+    }
 
     func toString() -> String {
         return "\(msTime)|\(secTime)|\(timeString)|\(content)"

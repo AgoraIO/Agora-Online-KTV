@@ -55,7 +55,7 @@
             }
         }
 
-        func getMusicList() -> Observable<Result<[LrcMusic]>> {
+        func getMusicList(key _: String?) -> Observable<Result<[LrcMusic]>> {
             return Single.create { single in
                 single(.success(Result(success: false, message: "not instance!")))
                 return Disposables.create()

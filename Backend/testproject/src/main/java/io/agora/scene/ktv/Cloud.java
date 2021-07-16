@@ -10,24 +10,18 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
+
 public class Cloud {
 
   private static OnLineResourceService resourceService = new OnLineResourceService();
 
   @EngineFunction("getMusic")
-  public static String getMusic(@EngineFunctionParam("id") String id) {
+  public static String getMusic(@EngineFunctionParam("id") String id) throws IOException {
     if (id == null) {
       return "400 Bad Request";
     }
     return resourceService.getMusicUrl(id);
-  }
-
-  @EngineFunction("getLrc")
-  public static String getLrc(@EngineFunctionParam("id") String id) {
-    if (id == null) {
-      return "400 Bad Request";
-    }
-    return resourceService.getLrcUrl(id);
   }
 
 }

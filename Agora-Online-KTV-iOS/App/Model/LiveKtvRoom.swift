@@ -27,6 +27,7 @@ class LiveKtvRoom: AgoraRoom, Equatable {
     public var count: Int = 0
     public var cover: String?
     public var mv: String?
+    public var createdAt: Date?
 
     public init(id: String, userId: String, channelName: String, cover: String?, mv: String?) {
         self.channelName = channelName
@@ -80,17 +81,31 @@ extension LiveKtvRoom {
     static let COVER = "cover"
     static let MV = "mv"
 
+    private static let CHECK_TIME_UP = true
+    private static let TIME_UP: Double = 10 * 60
+
     private static var manager: SyncManager {
         SyncManager.shared
     }
 
-    static func get(object: IAgoraObject) throws -> LiveKtvRoom {
+    static func get(object: IAgoraObject, check: Bool = false) throws -> LiveKtvRoom {
         let id = try object.getId()
         let ownerId = try object.getValue(key: LiveKtvRoom.OWNER_ID, type: String.self) as! String
         let name = try object.getValue(key: LiveKtvRoom.NAME, type: String.self) as! String
         let cover = try object.getValue(key: LiveKtvRoom.COVER, type: String.self) as? String
         let mv = try object.getValue(key: LiveKtvRoom.MV, type: String.self) as? String
-        return LiveKtvRoom(id: id, userId: ownerId, channelName: name, cover: cover, mv: mv)
+        let createdAt = try object.getValue(key: "createdAt", type: Date.self) as? Date
+        if check, CHECK_TIME_UP {
+            if let createdAt = createdAt {
+                let passTime = Date().timeIntervalSince1970 - createdAt.timeIntervalSince1970
+                if passTime >= TIME_UP {
+                    throw AgoraError(message: "当前房间直播时间超时！")
+                }
+            }
+        }
+        let room = LiveKtvRoom(id: id, userId: ownerId, channelName: name, cover: cover, mv: mv)
+        room.createdAt = createdAt
+        return room
     }
 
     static func create(room: LiveKtvRoom) -> Observable<Result<String>> {
@@ -147,7 +162,8 @@ extension LiveKtvRoom {
         return Single.create { single in
             let delegate = AgoraObjectDelegate { object in
                 do {
-                    single(.success(Result(success: true, data: try get(object: object))))
+                    let data = try get(object: object, check: true)
+                    single(.success(Result(success: true, data: data)))
                 } catch {
                     single(.success(Result(success: false, message: error.localizedDescription)))
                 }
@@ -215,7 +231,7 @@ extension LiveKtvRoom {
     }
 
     func subscribeMembers() -> Observable<Result<[LiveKtvMember]>> {
-        return Observable.create { [unowned self] observer -> Disposable in
+        return Observable<Result<Void>>.create { [unowned self] observer -> Disposable in
             let handler = LiveKtvRoom.manager
                 .getRoom(id: self.id)
                 .collection(className: LiveKtvMember.TABLE)
@@ -237,7 +253,7 @@ extension LiveKtvRoom {
     }
 
     func subscribeMusicList() -> Observable<Result<[LiveKtvMusic]>> {
-        return Observable.create { [unowned self] observer -> Disposable in
+        return Observable<Result<Void>>.create { [unowned self] observer -> Disposable in
             let handler = LiveKtvRoom.manager
                 .getRoom(id: self.id)
                 .collection(className: LiveKtvMusic.TABLE)
@@ -276,6 +292,8 @@ extension LiveKtvRoom {
                         case let .delete(id: id):
                             Logger.log(self, message: "(\(id)) delete", level: .info)
                             observer.onNext(Result<LiveKtvRoom>(success: true, data: nil))
+                        case .subscribed:
+                            observer.onNext(Result<LiveKtvRoom>(success: true, data: self))
                         }
                     } catch {
                         observer.onNext(Result<LiveKtvRoom>(success: false, message: error.localizedDescription))
@@ -288,6 +306,21 @@ extension LiveKtvRoom {
                 handler.unsubscribe()
             }
         }.startWith(Result(success: true, data: self))
+    }
+
+    func timeUp() -> Observable<Result<LiveKtvRoom>> {
+        if LiveKtvRoom.CHECK_TIME_UP, let createdAt = createdAt {
+            let leftTime = Int(LiveKtvRoom.TIME_UP - Date().timeIntervalSince1970 + createdAt.timeIntervalSince1970)
+            Logger.log(self, message: "leftTime: \(leftTime) date: \(createdAt)", level: .info)
+            if leftTime >= Int(LiveKtvRoom.TIME_UP) || leftTime <= 0 {
+                return Observable.just(Result(success: true, data: nil, message: "试用时间已到！"))
+            } else {
+                return Observable.just(Result(success: true, data: nil, message: "试用时间已到！"))
+                    .delay(RxTimeInterval.seconds(leftTime), scheduler: MainScheduler.instance)
+            }
+        } else {
+            return Observable.just(Result(success: true, data: self))
+        }
     }
 
     func changeMV(localMV: String) -> Observable<Result<Void>> {

@@ -286,6 +286,17 @@ class RoomController: BaseViewContoller, DialogDelegate {
         roomNameView.text = viewModel.room.channelName
         roomCoverView.image = UIImage(named: LiveKtvRoom.getLocalCover(cover: viewModel.room.cover), in: Utils.bundle, with: nil)
         mvPlayer.mv.image = UIImage(named: LiveKtvRoom.getLocalMV(cover: viewModel.room.mv), in: Utils.bundle, with: nil)
+        performSelector(inBackground: #selector(getImageColor), with: nil)
+    }
+
+    @objc private func getImageColor() {
+        if let image = UIImage(named: LiveKtvRoom.getLocalMV(cover: viewModel.room.mv), in: Utils.bundle, with: nil) {
+            let color = ColorThief.getColor(from: image)?.makeUIColor()
+            if let color = color {
+                Logger.log(self, message: "set MusicLyricView.hightColor \(color)", level: .info)
+                MusicLyricView.hightColor = color
+            }
+        }
     }
 
     private func renderToolbar() {
@@ -363,7 +374,7 @@ extension RoomController: RoomControlDelegate {
     }
 
     func onRoomClosed() {
-        dismiss(completion: nil)
+        leaveRoom()
     }
 
     func onPlayListChanged() {
