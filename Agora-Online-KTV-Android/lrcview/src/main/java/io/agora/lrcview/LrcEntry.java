@@ -129,15 +129,13 @@ public class LrcEntry {
         int doneLen = 0;
         float curLen = 0f;
 
-        int index = 0;
         IEntry.Tone[] tones = mIEntry.getTones();
-        for (IEntry.Tone tone : tones) {
-            int wordLen = textRectWords[index].right - textRectWords[index].left;
+        for (int i = 0; i < tones.length; i++) {
+            IEntry.Tone tone = tones[i];
+            int wordLen = textRectWords[i].right - textRectWords[i].left;
 
             if (time > tone.end) {
                 doneLen = doneLen + wordLen;
-
-                index++;
             } else {
                 float percent = (time - tone.begin) / (float) (tone.end - tone.begin);
                 curLen = wordLen * percent;
