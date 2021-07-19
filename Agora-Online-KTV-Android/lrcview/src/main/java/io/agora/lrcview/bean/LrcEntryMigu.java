@@ -50,6 +50,8 @@ public class LrcEntryMigu implements IEntry {
             } else {
                 localTone.lang = Lang.English;
             }
+
+            LocalTones[i] = localTone;
         }
         return new LrcEntry(this);
     }

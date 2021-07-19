@@ -93,15 +93,12 @@ public final class MusicResourceManager {
                                         File fileLrcNew = new File(resourceRoot, musicModel.getMusicId() + ".xml");
                                         unzipLrc(fileLrc, fileLrcNew);
                                         musicModel.setFileLrc(fileLrcNew);
+                                        emitter.onComplete();
                                     }
                                 }));
                             }
-                            return mCompletable.toSingle(new Callable<MemberMusicModel>() {
-                                @Override
-                                public MemberMusicModel call() throws Exception {
-                                    return musicModel;
-                                }
-                            });
+
+                            return mCompletable.andThen(Single.just(musicModel));
                         } else {
                             Completable mCompletable = DataRepositroy.Instance(mContext).download(fileLrc, musicModel.getLrc());
                             if (model.getLrc().endsWith("zip")) {
@@ -111,6 +108,7 @@ public final class MusicResourceManager {
                                         File fileLrcNew = new File(resourceRoot, musicModel.getMusicId() + ".xml");
                                         unzipLrc(fileLrc, fileLrcNew);
                                         musicModel.setFileLrc(fileLrcNew);
+                                        emitter.onComplete();
                                     }
                                 }));
                             }
@@ -146,6 +144,8 @@ public final class MusicResourceManager {
     }
 
     private void unzipLrc(File src, File des) throws Exception {
+        mLogger.i("prepareMusic unzipLrc %s", des);
+
         ZipInputStream inZip = new ZipInputStream(new FileInputStream(src));
         ZipEntry zipEntry;
         String szName = null;
